@@ -1,0 +1,13 @@
+<!-- src/app/shopping-list/shopping-list.component.html -->
+<h2>Daftar Belanja</h2>
+<ul>
+  <li *ngFor="let item of shoppingItems" 
+      [style.backgroundColor]="getStatusColor(item.status)"
+      class="list-item">
+    <span [ngStyle]="{'font-style': item.status === 'Done' ? 'italic' : 'normal'}">
+      {{ item.status === 'Done' ? (item.name | uppercase) : item.name }}
+    </span>
+    - {{ item.date | date:'dd MMM yyyy' }}
+    <small>({{ item.status }})</small>
+  </li>
+</ul>

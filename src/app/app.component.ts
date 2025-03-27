@@ -1,12 +1,13 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [ShoppingListComponent], // <-- Import di sini
+  template: `
+    <app-shopping-list></app-shopping-list>
+  `,
 })
-export class AppComponent {
-  title = 'latihan-angular';
-}
+export class AppComponent {}
