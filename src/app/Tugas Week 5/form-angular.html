@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Form Validation AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .error { color: red; }
+        .form-group { margin-bottom: 15px; }
+        .input-group { margin-bottom: 10px; }
+        .box-result {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body ng-controller="formController">
+    <div class="container">
+        <h2>Form Registrasi</h2>
+        <form name="userForm" novalidate>
+            <div class="form-group">
+                <label>Nama:</label>
+                <input type="text" name="nama" ng-model="formData.nama" required class="form-control">
+                <span ng-show="userForm.nama.$touched && userForm.nama.$error.required" class="error">
+                    Nama harus diisi
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" ng-model="formData.email" required class="form-control">
+                <span ng-show="userForm.email.$touched && userForm.email.$error.required" class="error">
+                    Email harus diisi
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" ng-model="formData.password" required class="form-control">
+                <span ng-show="userForm.password.$touched && userForm.password.$error.required" class="error">
+                    Password harus diisi
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>No. Telp:</label>
+                <input type="number" name="notelp" ng-model="formData.notelp" required class="form-control">
+                <span ng-show="userForm.notelp.$touched && userForm.notelp.$error.required" class="error">
+                    Nomor telepon harus diisi
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>Alamat:</label>
+                <textarea name="alamat" ng-model="formData.alamat" required class="form-control"></textarea>
+                <span ng-show="userForm.alamat.$touched && userForm.alamat.$error.required" class="error">
+                    Alamat harus diisi
+                </span>
+            </div>
+
+            <button type="submit" ng-click="saveUser()" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div class="box-result" ng-if="userData">
+            <h3>Data yang dimasukkan:</h3>
+            <div ng-repeat="(key, value) in userData">
+                <strong>{{ key }}:</strong> {{ value }}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        angular.module('myApp', [])
+        .controller('formController', function($scope) {
+            $scope.formData = {};
+            $scope.userData = null;
+
+            $scope.saveUser = function() {
+                if ($scope.userForm.$valid) {
+                    // Get all form values in one function
+                    $scope.userData = {
+                        Nama: $scope.formData.nama,
+                        Email: $scope.formData.email,
+                        Password: $scope.formData.password,
+                        'No Telp': $scope.formData.notelp,
+                        Alamat: $scope.formData.alamat
+                    };
+                }
+            };
+        });
+    </script>
+</body>
+</html>
